@@ -9,18 +9,66 @@ class VisualisasiDashboard extends CI_Model
         $this->db->select('count(dp.usia_suami) as rata_suami, dp.usia_suami');
         $this->db->from('fact_tingkat_perceraian ftp');
         $this->db->join('dim_pasangan dp', 'dp.id_pasangan = ftp.id_pasangan', 'left');
-        $this->db->group_by('dp.usia_istri');
+        $this->db->group_by('dp.usia_suami');
+        $this->db->order_by('rata_suami', 'desc');
+        $this->db->limit(1);
+
+        return $this->db->get()->result();
+    }
+
+    function countKecamatanTertinggi()
+    {
+        $this->db->select('count(dl.kecamatan) as total_kecamatan, dl.kecamatan');
+        $this->db->from('fact_tingkat_perceraian ftp');
+        $this->db->join('dim_lokasi dl', 'dl.id_lokasi = ftp.id_lokasi', 'left');
+        $this->db->group_by('dl.kecamatan');
+        $this->db->order_by('total_kecamatan', 'desc');
+        $this->db->limit(1);
         return $this->db->get()->result();
     }
 
     function countRataUsiaIstri()
     {
-        $this->db->select('count(ftp.id_tingkat_perceraian) as rata_istri');
+        $this->db->select('count(dp.usia_suami) as rata_istri, dp.usia_istri');
         $this->db->from('fact_tingkat_perceraian ftp');
         $this->db->join('dim_pasangan dp', 'dp.id_pasangan = ftp.id_pasangan', 'left');
         $this->db->group_by('dp.usia_istri');
+        $this->db->order_by('rata_istri', 'desc');
+        $this->db->limit(1);
+
         return $this->db->get()->result();
     }
+
+    function countJenisPerkara()
+    {
+        $this->db->select('count(djp.jenis_perkara) as total_jenis_perkara, djp.jenis_perkara');
+        $this->db->from('fact_tingkat_perceraian ftp');
+        $this->db->join('dim_jenis_perkara djp', 'djp.id_jenis_perkara = ftp.id_jenis_perkara', 'left');
+        $this->db->group_by('djp.jenis_perkara');
+        $this->db->order_by('total_jenis_perkara', 'desc');
+        $this->db->limit(1);
+        return $this->db->get()->result();
+    }
+
+    function countAllPerceraian()
+    {
+        $this->db->select('count(id_tingkat_perceraian) as total_cerai ');
+        $this->db->from('fact_tingkat_perceraian');
+        return $this->db->get()->result();
+    }
+
+
+    function countPenyebabCerai()
+    {
+        $this->db->select('count(dp.faktor_penyebab_perceraian) as total_penyebab, dp.faktor_penyebab_perceraian');
+        $this->db->from('fact_tingkat_perceraian ftp');
+        $this->db->join('dim_faktor_penyebab_perceraian dp', 'dp.id_faktor_penyebab_perceraian = ftp.id_faktor_penyebab_perceraian', 'left');
+        $this->db->group_by('dp.faktor_penyebab_perceraian');
+        $this->db->order_by('total_penyebab', 'desc');
+        $this->db->limit(1);
+        return $this->db->get()->result();
+    }
+
 
     function perkaraPerceraian($jenis_perkara)
     {

@@ -82,12 +82,21 @@
     </div>
 
     <div class="col-sm-6 col-lg-3">
+
         <div class="card text-white bg-flat-color-1">
             <div class="card-body pb-0">
                 <small class="mb-0">
-                    Kasus: <span class="count"><?php echo $countRataUsiaSuami[0]->rata_suami; ?></span>
+                    Usia Cerai Laki-laki
                 </small>
-                <p style="font-size:12px" class="text-light">Rata2 Umur Cerai Laki-laki</p>
+                <p style="font-size:12px" class="text-light">
+                    Terjadi pada Usia : <span class="count">
+                        <?php
+                        foreach ($countRataUsiaSuami as $r) {
+                            echo $r->usia_suami . ' Tahun';
+                        }
+                        ?>
+                    </span>
+                </p>
             </div>
 
         </div>
@@ -96,11 +105,18 @@
         <div class="card text-white bg-flat-color-1">
             <div class="card-body pb-0">
                 <small class="mb-0">
-                    Kasus: <span class="count">9</span>
+                    Usia Cerai Perempuan
                 </small>
-                <p style="font-size:12px" class="text-light">Rata2 Umur Cerai Perempuan</p>
+                <p style="font-size:12px" class="text-light">
+                    Terjadi pada Usia : <span class="count">
+                        <?php
+                        foreach ($countRataUsiaIstri as $r) {
+                            echo $r->usia_istri . ' Tahun';
+                        }
+                        ?>
+                    </span>
+                </p>
             </div>
-
         </div>
     </div>
     <!--/.col-->
@@ -109,16 +125,20 @@
         <div class="card text-white bg-flat-color-2">
             <div class="card-body pb-0">
                 <small class="mb-0">
-                    Kasus: <span class="count">3</span>
+                    Kecamatan Tertinggi pada
                 </small>
-                <p style="font-size:12px" class="text-light">Berd. Lokasi Terbanyak</p>
+                <p style="font-size:12px" class="text-light">
+                    <?php foreach ($countKecamatanTertinggi as $b) {
+                        echo $b->kecamatan;
+                    } ?>
+                </p>
             </div>
 
         </div>
     </div>
     <!--/.col-->
 
-    <div class="col-sm-6 col-lg-3">
+    <!-- <div class="col-sm-6 col-lg-3">
         <div class="card text-white bg-flat-color-3">
             <div class="card-body pb-0">
                 <small class="mb-0">
@@ -128,16 +148,18 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
     <!--/.col-->
 
     <div class="col-sm-6 col-lg-3">
         <div class="card text-white bg-flat-color-4">
             <div class="card-body pb-0">
                 <small class="mb-0">
-                    Kasus: <span class="count">4</span>
+                    Jenis Perkara
                 </small>
-                <p style="font-size:12px" class="text-light">Rata2 Jenis Perkara</p>
+                <p style="font-size:12px" class="text-light"><?php foreach ($countJenisPerkara as $row) {
+                                                                    echo $row->jenis_perkara;
+                                                                } ?></p>
             </div>
 
         </div>
@@ -148,9 +170,9 @@
         <div class="card text-white bg-flat-color-5">
             <div class="card-body pb-0">
                 <small class="mb-0">
-                    Kasus: <span class="count">33</span>
+                    Kasus: <span class="count"><?php echo $countAllPerceraian[0]->total_cerai; ?></span>
                 </small>
-                <p style="font-size:12px" class="text-light">Total Perceraian</p>
+                <p style="font-size:12px" class="text-light">Total Perceraian Keseluruhan</p>
             </div>
         </div>
     </div>
@@ -159,9 +181,11 @@
         <div class="card text-white bg-flat-color-5">
             <div class="card-body pb-0">
                 <small class="mb-0">
-                    Kasus: <span class="count">33</span>
+                    Kasus: <span class="count"><?php foreach ($countPenyebabCerai as $b) {
+                                                    echo $b->faktor_penyebab_perceraian;
+                                                } ?></span>
                 </small>
-                <p style="font-size:12px" class="text-light">Faktor Penyebab Cerai</p>
+                <p style="font-size:12px" class="text-light">Faktor Penyebab Cerai Tertinggi</p>
             </div>
         </div>
     </div>

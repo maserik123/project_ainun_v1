@@ -67,7 +67,6 @@ class Dashboard extends CI_Controller
     function dashboardKedua($param = '', $id = '')
     {
         $data['title'] = 'Dashboard Bagian Kedua';
-
         $thn = '';
 
         if ($param == '') {
@@ -88,6 +87,11 @@ class Dashboard extends CI_Controller
 
         $data['countRataUsiaSuami'] = $this->VisualisasiDashboard->countRataUsiaSuami();
         $data['countRataUsiaIstri'] = $this->VisualisasiDashboard->countRataUsiaIstri();
+        $data['countKecamatanTertinggi'] = $this->VisualisasiDashboard->countKecamatanTertinggi();
+        $data['countJenisPerkara'] = $this->VisualisasiDashboard->countJenisPerkara();
+        $data['countAllPerceraian'] = $this->VisualisasiDashboard->countAllPerceraian();
+        $data['countPenyebabCerai'] = $this->VisualisasiDashboard->countPenyebabCerai();
+
         $data['perkaraPerceraianGugat'] = $this->VisualisasiDashboard->perkaraPerceraian('Cerai Gugat');
         $data['perkaraPerceraianTalak'] = $this->VisualisasiDashboard->perkaraPerceraian('Cerai Talak');
         $data['penyebabPerceraianPertahun'] = $this->VisualisasiDashboard->penyebabPerceraianPertahun();
@@ -120,6 +124,7 @@ class Dashboard extends CI_Controller
     {
         $view['title'] = 'Dashboard Bagian Kedua';
         $thn = '';
+        $param = $this->input->post('tahun');
         if ($param == '') {
             $thn = 2020;
         } else {
@@ -137,6 +142,7 @@ class Dashboard extends CI_Controller
         $data['page'] = 'dashboard';
 
         $data['id_lokasi'] = $this->input->post('id_lokasi');
+
         $data['getPenyebabPerKecamatan'] = $this->VisualisasiDashboard->getPenyebabPerceraianPerkecamatan();
         $data['getFaktorPenyebabPerceraian'] = $this->VisualisasiDashboard->getFaktorPenyebabPerceraian();
         $data['getKecamatan'] = $this->VisualisasiDashboard->getKecamatan();
